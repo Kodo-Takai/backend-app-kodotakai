@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { Logger, ValidationPipe } from '@nestjs/common';
+import { configureSwagger } from './utils/docs/swagger';
 
 async function bootstrap() {
   const logger = new Logger('Main');
@@ -15,7 +16,9 @@ async function bootstrap() {
       transform: true,
     }),
   );
+
+  configureSwagger(app);
   logger.log('Application is starting...');
-  await app.listen(process.env.PORT ?? 3000);
+  await app.listen(process.env.PORT ?? 3001);
 }
 bootstrap();

@@ -1,0 +1,13 @@
+services:
+  viaja-ya-bd:
+    container_name: viaja-ya-bd
+    image: postgres:16.2
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+    ports:
+      - "5438:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: viaja-ya-bd
+      POSTGRES_HOST_AUTH_METHOD: md5
