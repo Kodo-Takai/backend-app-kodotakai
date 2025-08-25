@@ -25,3 +25,40 @@ model Destinations {
 
   @@map("destinations")
 }
+
+model User {
+  id        String   @id @default(uuid())
+  username   String   @unique
+  password  String
+  status    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime?
+
+  usernameRoles usernameRol[]
+}
+
+model Profile {
+  id              String   @id @default(uuid())
+  name          String
+  lastName        String
+  phone        String?
+  address       String?
+  gender          String?
+  email           String   @unique
+  photo            String?
+  status          Boolean  @default(true)
+  birthDate DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime?
+
+  usernameRoles    usernameRol[]
+}
+
+model usernameRol {
+  id        String   @id @default(uuid())
+  userId    String
+  profileId String
+
+  user      User     @relation(fields: [userId], references: [id])
+  profile   Profile  @relation(fields: [profileId], references: [id])
+}
